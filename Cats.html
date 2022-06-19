@@ -1,57 +1,90 @@
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Massive Printer</title>
-	<meta charset='utf-8'>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Massive Printer</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-	<button onclick="doSomething()" style="position: block; top: 50%; right: 50%">Do something</button>
+  <body>
+    <div>
+      <button
+        onclick="doSomething()"
+        style="position: block; top: 50%; right: 50%"
+      >
+        Spread Catagion
+      </button>
+      <button
+        onclick="doNewThing()"
+        style="position: block; bottom: 50%; right: auto"
+      >
+        Do nothing
+      </button>
+    </div>
+    <div
+      id="container"
+      style="
+        position: relative;
+        width: 80%;
+        height: 100%;
+        margin-left: 10%;
+        margin-right: 10%;
+      "
+    ></div>
+  </body>
 
-	<div id="container" style="position: absolute; width: 80%; height: 100%; margin-left: 10%; margin-right: 10%;">		
-	</div>
+  <script type="text/javascript">
+    var randWidth;
+    var randHeight;
+    var randSize;
 
-</body>
-<script type="text/javascript">
+    var counter = 0;
+    var checker = false;
 
-	var randWidth;
-	var randHeight;
-	var randSize;
+    function doSomething() {
+      setInterval(function () {
+        printer('😼');
+      }, 700);
+    }
 
-	var counter = 0;
-	var checker = false;
-	
+    function doNewThing() {
+      setInterval(function () {
+        printer('🧘');
+      }, 700);
+    }
 
-	function doSomething(){
-		setInterval(function() { printer() }, 700);
-		console.log("What;");
-	}
+    function printer(inputEmoji) {
+      randWidth = Math.floor(Math.random() * 100);
+      randHeight = Math.floor(Math.random() * 81);
+      randSize = Math.floor(Math.random() * 30) + 30;
 
-	function printer(){
+      var div = document.createElement('div');
 
-		console.log("What;");
-		randWidth = Math.floor(Math.random() * 100);
-		randHeight = Math.floor(Math.random() * 81);
-		randSize = Math.floor(Math.random() * 30) + 30;
+      div.innerHTML = inputEmoji;
+      div.style =
+        'position: absolute; top: ' +
+        randHeight +
+        '%; right: ' +
+        randWidth +
+        '%; font-size: ' +
+        randSize +
+        'px;';
 
-		var div = document.createElement('div');
-		
-		div.innerHTML = '😼'	;
-		div.style = 'position: absolute; top: ' + randHeight + '%; right: ' + randWidth + '%; font-size: ' + randSize + 'px;';
-		div.onclick = function () {
-			div.style = 'display: none';
-			counter--;
-		};
+      div.onclick = function () {
+        div.style = 'display: none';
+        counter--;
+      };
 
-		if(checker && counter === 0){
-			alert("You Win");
-		}
-		
-		document.getElementById('container').appendChild(div);
-		counter++;
+      if (checker && counter === 0) {
+        alert('You Win');
+      }
 
-		checker = true;
-	}
+      document.getElementById('container').appendChild(div);
+      counter++;
 
-</script>
+      checker = true;
+    }
+  </script>
 </html>
